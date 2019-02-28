@@ -2,10 +2,43 @@
 
 
 #include "TankAIController.h"
+#include "GameFramework/Actor.h"
+#include "Engine/World.h"
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
+	PlayerTankDetection();
+}
+
+ATank* ATankAIController::GetControlledTank() const
+{
+	return Cast<ATank>(GetPawn());
+}
+
+ATank* ATankAIController::GetPlayerTank() const
+{
+	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!PlayerPawn) { return nullptr; }
+	return Cast<ATank>(PlayerPawn);
+}
+
+void ATankAIController::PlayerTankDetection() const
+{
+	auto PlayerTank = GetPlayerTank();
+	if (PlayerTank)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player controller tank detected: %s"), *PlayerTank->GetName())
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Couldn't find player controller tank "))
+	}
+}
+
+// not used yet
+void ATankAIController::AIControllerPossesion() const
+{
 	auto AIControlledTank = GetControlledTank();
 	if (AIControlledTank)
 	{
@@ -15,10 +48,5 @@ void ATankAIController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("AIController not possesing a tank"));
 	}
-}
-
-ATank* ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
 }
 
