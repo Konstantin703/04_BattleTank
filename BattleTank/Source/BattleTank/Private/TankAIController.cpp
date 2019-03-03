@@ -13,7 +13,7 @@ void ATankAIController::BeginPlay()
 
 void ATankAIController::Tick(float DeltaTime)
 {
-	Super::BeginPlay();
+	Super::Tick(DeltaTime);
 	//auto ControlledTank = GetControlledTank();
 	if (GetPlayerTank()) 
 	{
