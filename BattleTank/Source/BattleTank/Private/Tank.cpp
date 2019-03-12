@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank.h"
+#include "TankAimingComponent.h"
+
 
 
 // Sets default values
@@ -27,7 +29,7 @@ void ATank::BeginPlay()
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	Super::SetupPlayerInputComponent(PlayerInputComponent); // TODO: why it's highlighted with red
 }
 
 void ATank::AimAt(FVector HitLocation)
