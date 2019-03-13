@@ -39,10 +39,10 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		false,
 		0,
 		0,
-		ESuggestProjVelocityTraceOption::DoNotTrace, // should be here to prevent bug
-		FCollisionResponseParams::DefaultResponseParam,
-		TArray<AActor*>(),
-		true //debug draw
+		ESuggestProjVelocityTraceOption::DoNotTrace // should be here to prevent bug
+		//FCollisionResponseParams::DefaultResponseParam,
+		//TArray<AActor*>(),
+		//true //debug draw
 	);
 
 	auto Time = GetWorld()->GetTimeSeconds();
@@ -68,5 +68,5 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	//UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString());
 	
-	Barrel->Elevate(5);
+	Barrel->Elevate(DeltaRotator.Pitch);
 }
