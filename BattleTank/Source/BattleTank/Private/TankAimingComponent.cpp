@@ -50,8 +50,6 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		//true //debug draw
 	);
 
-	//auto Time = GetWorld()->GetTimeSeconds();
-
 	if (bHaveAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();		
