@@ -15,7 +15,7 @@ ATank::ATank()
 
 	// No nned to protect pointers as added to construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
+	
 }
 
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
