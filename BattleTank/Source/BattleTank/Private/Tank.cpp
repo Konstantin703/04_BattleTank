@@ -20,6 +20,9 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP to work
+
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("KITTY:: %s ATank Begin Play"), *TankName);
 }
 
 void ATank::AimAt(FVector HitLocation)
