@@ -5,7 +5,6 @@
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
 
-
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();	
@@ -26,6 +25,5 @@ void ATankAIController::Tick(float DeltaTime)
 	auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
 	AimingComponent->AimAt(PlayerTank->GetTargetLocation());
 	
-	// TODO fix firing
-	//ControlledTank->Fire();	
+	AimingComponent->Fire();	
 }
