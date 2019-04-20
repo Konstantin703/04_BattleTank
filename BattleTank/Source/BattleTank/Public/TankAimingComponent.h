@@ -36,7 +36,7 @@ public:
 	void Fire();
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetRoundsLeft() const;
+	int32 GetRoundsLeft() const;
 
 	EFiringStatus GetFiringStatus() const;
 
@@ -65,14 +65,13 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 RoundsLeft = 3;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	double LastFireTime = 0;
 
 	FVector AimDirection;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int RoundsLeft = 3;
-
 };
