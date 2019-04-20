@@ -10,4 +10,6 @@ UCLASS()
 class BATTLETANK_API AAutoMortar : public APawn
 {
 	GENERATED_BODY()
+
+	AAutoMortar();
 };
