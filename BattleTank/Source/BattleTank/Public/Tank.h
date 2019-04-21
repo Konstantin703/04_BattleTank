@@ -31,4 +31,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
 	int32 CurrentHealth = StartingHealth;
+
+	//TODO this function should enable simulate physics on tank static mesh components
+	//so after death it looks like destroyed tank
+	void DestroyTank();
 };
