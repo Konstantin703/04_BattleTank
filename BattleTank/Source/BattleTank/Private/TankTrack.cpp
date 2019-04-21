@@ -23,13 +23,13 @@ void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UP
 
 void UTankTrack::ApplySidewaysForce()
 {
-	auto SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
+	float SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
 	// Work-out the rqired acceleration this frame to correct
-	auto DeltaTime = GetWorld()->GetDeltaSeconds();
-	auto CorrectionAcceleration = -SlippageSpeed / DeltaTime * GetRightVector();
+	float DeltaTime = GetWorld()->GetDeltaSeconds();
+	FVector CorrectionAcceleration = -SlippageSpeed / DeltaTime * GetRightVector();
 	// Calculate and apply sideways (F = m a)
-	auto TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
-	auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // because two tracks
+	UStaticMeshComponent* TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
+	FVector CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // because two tracks
 	TankRoot->AddForce(CorrectionForce);
 }
 
@@ -40,9 +40,9 @@ void UTankTrack::SetThrottle(float Throttle)
 
 void UTankTrack::DriveTrack()
 {
-	auto ForceApplied = GetForwardVector() * CurrentThrottle * TrackMaxDrivingForce;
-	auto ForceLocation = GetComponentLocation();
-	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
+	FVector ForceApplied = GetForwardVector() * CurrentThrottle * TrackMaxDrivingForce;
+	FVector ForceLocation = GetComponentLocation();
+	UPrimitiveComponent* TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
 	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
 }
 

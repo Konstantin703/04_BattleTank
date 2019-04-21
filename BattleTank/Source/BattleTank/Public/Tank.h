@@ -25,12 +25,14 @@ public:
 
 private:
 	ATank();
+
+	virtual void BeginPlay() override;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	int32 StartingHealth = 100;
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
-	int32 CurrentHealth = StartingHealth;
+	int32 CurrentHealth; // initialize at bgin play
 
 	//TODO this function should enable simulate physics on tank static mesh components
 	//so after death it looks like destroyed tank
