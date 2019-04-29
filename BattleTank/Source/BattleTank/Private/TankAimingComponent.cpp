@@ -20,6 +20,7 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::BeginPlay()
 {
+	Super::BeginPlay();
 	LastFireTime = FPlatformTime::Seconds();
 }
 
@@ -84,12 +85,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	}
 }
 
-void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+void UTankAimingComponent::MoveBarrelTowards(FVector TargetAimDirection)
 {
 	if (!ensure(Barrel || Turret)) { return; }
 
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
-	FRotator AimAsRotator = AimDirection.Rotation();
+	FRotator AimAsRotator = TargetAimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
 
 	Barrel->Elevate(DeltaRotator.Pitch);

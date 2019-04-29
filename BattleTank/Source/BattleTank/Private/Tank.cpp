@@ -31,8 +31,6 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEv
 	{
 		OnDeath.Broadcast();
 	}
-	UE_LOG(LogTemp, Warning, TEXT("DamageAmount=%f, DamageToApply=%i"), DamageAmount, DamageToApply);
-
 	return DamageToApply;
 }
 

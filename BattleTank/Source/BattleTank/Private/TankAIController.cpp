@@ -17,29 +17,27 @@ void ATankAIController::SetPawn(APawn* InPawn)
 	if (InPawn)
 	{
 		ATank* PossesedTank = Cast<ATank>(InPawn);
-		if (!ensure(PossesedTank)) { return; }
+		if (!PossesedTank) { return; }
 		PossesedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossesedTankDeath);
 	}
 }
 
 void ATankAIController::OnPossesedTankDeath()
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Delegate ATankAIController::OnPossesedTankDeath recived"));
-	if (!ensure(GetPawn())) { return; }
+	if (!GetPawn()) { return; }
 	GetPawn()->DetachFromControllerPendingDestroy();
 }
 
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//auto ControlledTank = GetControlledTank();
 	APawn* PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 	APawn* ControlledTank = GetPawn();
 	
-	if (!ensure(PlayerTank && ControlledTank)) { return; }
+	if (!(PlayerTank && ControlledTank)) { return; }
 	
-	// Moe towards the player
-	MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius in cm
+	// Move towards the player
+	MoveToActor(PlayerTank, AcceptanceRadius);
 	
 	UTankAimingComponent* AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
 	AimingComponent->AimAt(PlayerTank->GetTargetLocation());
