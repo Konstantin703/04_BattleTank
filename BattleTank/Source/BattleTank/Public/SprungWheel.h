@@ -27,11 +27,15 @@ public:
 private:
 	void SetupConstraint();
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UStaticMeshComponent* Wheel = nullptr;
+	//UPROPERTY(VisibleDefaultsOnly, Category = "Components")
+	//USphereComponent* Wheel = nullptr;
 
+	//UPROPERTY(VisibleDefaultsOnly, Category = "Components")
+	//USphereComponent* Axle = nullptr;
+	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UPhysicsConstraintComponent* MassWheelConstraint = nullptr;
-	
-	
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UPhysicsConstraintComponent* AxleWheelConstraint = nullptr;	
 };
