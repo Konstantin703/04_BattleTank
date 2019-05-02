@@ -32,7 +32,7 @@ private:
 	void OnTimerExpire();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	float ProjectileDamage = 30;
+	float ProjectileDamage = 15;
 
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 
