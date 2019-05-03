@@ -8,10 +8,12 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
 
+class UTankMovementComponent;
+
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
-	GENERATED_BODY()
+	GENERATED_BODY()			//GENERATED_UCLASS_BODY() // TODO check what is it
 
 public:
 	// Called by the engine when damage is taken
@@ -23,6 +25,12 @@ public:
 
 	FTankDelegate OnDeath;
 
+protected:
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* MovementComponent;
+
 private:
 	ATank();
 
@@ -33,7 +41,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
 	int32 CurrentHealth; // initialize at bgin play
-
+	
 	//TODO this function should enable simulate physics on tank static mesh components
 	//so after death it looks like destroyed tank
 	void DestroyTank();

@@ -2,18 +2,26 @@
 
 #include "Tank.h"
 #include "TankMovementComponent.h"
-
+#include "Components/InputComponent.h"
+#include "TankPlayerController.h"
+#include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
 // Sets default values
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+	MovementComponent = CreateDefaultSubobject<UTankMovementComponent>(TEXT("TankMovementComponent"));
+
 }
 
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	CurrentHealth = StartingHealth;
+
+
+
 }
 
 float ATank::GetHealthPercent() const
@@ -32,6 +40,14 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEv
 		OnDeath.Broadcast();
 	}
 	return DamageToApply;
+}
+
+void ATank::SetupPlayerInputComponent(UInputComponent * PlayerInputComponent)
+{
+	if (!ensure(PlayerInputComponent)) return;
+	PlayerInputComponent->BindAxis("Forward", MovementComponent, &UTankMovementComponent::IntendMoveForward);
+	PlayerInputComponent->BindAxis("TurnRight", MovementComponent, &UTankMovementComponent::IntendTurnRight);
+	//PlayerInputComponent->BindAxis("Turn Right", this, 
 }
 
 void ATank::DestroyTank() {}
