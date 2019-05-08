@@ -40,10 +40,21 @@ void ATankAIController::Tick(float DeltaTime)
 	MoveToActor(PlayerTank, AcceptanceRadius);
 	
 	UTankAimingComponent* AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
-	AimingComponent->AimAt(PlayerTank->GetTargetLocation());
+
+	// Temporary desission
+	float Shift = 100;
+	FVector FireDestination = FVector(
+		PlayerTank->GetTargetLocation().X + FMath::FRandRange(-Shift, Shift),
+		PlayerTank->GetTargetLocation().Y + FMath::FRandRange(-Shift, Shift),
+		PlayerTank->GetTargetLocation().Z + FMath::FRandRange(-Shift, Shift)
+	);
+	
+	AimingComponent->AimAt(FireDestination);
 	
 	if (AimingComponent->GetFiringStatus() == EFiringStatus::Locked)
 	{
 		AimingComponent->Fire();
+		UE_LOG(LogTemp, Warning, TEXT("%s is firing at Player's location: %s"), *GetPawn()->GetName(), *PlayerTank->GetTargetLocation().ToString());
+
 	}	
 }
