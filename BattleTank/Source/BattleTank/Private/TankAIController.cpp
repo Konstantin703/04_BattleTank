@@ -55,6 +55,5 @@ void ATankAIController::Tick(float DeltaTime)
 	{
 		AimingComponent->Fire();
 		UE_LOG(LogTemp, Warning, TEXT("%s is firing at Player's location: %s"), *GetPawn()->GetName(), *PlayerTank->GetTargetLocation().ToString());
-
 	}	
 }
